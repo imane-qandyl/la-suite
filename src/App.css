@@ -1,0 +1,35 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 3rem 1.5rem;
+}
+
+.reminder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.toggle {
+  min-width: 5rem;
+  padding: 0.5rem 1rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.toggle:hover {
+  border-color: var(--text);
+}
+
+.toggle:focus-visible {
+  outline: 2px solid var(--text-h);
+  outline-offset: 2px;
+}

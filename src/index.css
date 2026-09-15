@@ -1,0 +1,39 @@
+:root {
+  --text: #444;
+  --text-h: #111;
+  --bg: #fff;
+  --border: #ccc;
+
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 2rem;
+  color: var(--text-h);
+}
+
+h2 {
+  font-size: 1.25rem;
+  color: var(--text-h);
+}
