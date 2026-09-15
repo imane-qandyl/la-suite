@@ -21,6 +21,8 @@
 		A1B100052FED79650016851F /* LaSuiteAppShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B100042FED79650016851F /* LaSuiteAppShortcuts.swift */; };
 		A1B100072FED79650016851F /* ReminderBridgePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B100062FED79650016851F /* ReminderBridgePlugin.swift */; };
 		A1B100092FED79650016851F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B100082FED79650016851F /* MainViewController.swift */; };
+		A1B1000C2FED79650016851F /* CreateReminderIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B1000B2FED79650016851F /* CreateReminderIntent.swift */; };
+		A1B1000E2FED79650016851F /* ReminderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B1000D2FED79650016851F /* ReminderService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		A1B100062FED79650016851F /* ReminderBridgePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderBridgePlugin.swift; sourceTree = "<group>"; };
 		A1B100082FED79650016851F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A1B1000A2FED79650016851F /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
+		A1B1000B2FED79650016851F /* CreateReminderIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReminderIntent.swift; sourceTree = "<group>"; };
+		A1B1000D2FED79650016851F /* ReminderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,8 @@
 				A1B100062FED79650016851F /* ReminderBridgePlugin.swift */,
 				A1B100002FED79650016851F /* ReminderStateStore.swift */,
 				A1B100022FED79650016851F /* ActivateReminderIntent.swift */,
+				A1B1000B2FED79650016851F /* CreateReminderIntent.swift */,
+				A1B1000D2FED79650016851F /* ReminderService.swift */,
 				A1B100042FED79650016851F /* LaSuiteAppShortcuts.swift */,
 				A1B1000A2FED79650016851F /* App.entitlements */,
 				9582B6822FE993A50072D4E8 /* SceneDelegate.swift */,
@@ -187,6 +193,8 @@
 				A1B100072FED79650016851F /* ReminderBridgePlugin.swift in Sources */,
 				A1B100012FED79650016851F /* ReminderStateStore.swift in Sources */,
 				A1B100032FED79650016851F /* ActivateReminderIntent.swift in Sources */,
+				A1B1000C2FED79650016851F /* CreateReminderIntent.swift in Sources */,
+				A1B1000E2FED79650016851F /* ReminderService.swift in Sources */,
 				A1B100052FED79650016851F /* LaSuiteAppShortcuts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

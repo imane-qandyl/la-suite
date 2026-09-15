@@ -19,9 +19,20 @@ public class ReminderBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         bridgeLogger.info(
             "getReminderState called. appGroup=\(ReminderStateStore.appGroupID, privacy: .public) usingAppGroup=\(ReminderStateStore.shared.isUsingAppGroup)"
         )
-        let on = ReminderStateStore.shared.isReminderOn
-        bridgeLogger.info("getReminderState returning on=\(on)")
-        call.resolve(["on": on])
+        let store = ReminderStateStore.shared
+        let on = store.isReminderOn
+        var result: [String: Any] = ["on": on]
+
+        if let text = store.reminderText {
+            result["text"] = text
+        }
+
+        if let date = store.reminderDate {
+            result["date"] = ISO8601DateFormatter().string(from: date)
+        }
+
+        bridgeLogger.info("getReminderState returning on=\(on) text=\(store.reminderText ?? "nil") date=\(store.reminderDate?.description ?? "nil")")
+        call.resolve(result)
     }
 
     @objc func setReminderState(_ call: CAPPluginCall) {

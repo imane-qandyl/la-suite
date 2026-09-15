@@ -6,6 +6,14 @@ final class ReminderStateStore {
 
     static let appGroupID = "group.com.lasuite.app"
     static let reminderKey = "reminderOn"
+    static let reminderTextKey = "reminderText"
+    static let reminderDateKey = "reminderDateISO8601"
+
+    private static let iso8601Formatter: ISO8601DateFormatter = {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        return formatter
+    }()
 
     private static let logger = Logger(
         subsystem: Bundle.main.bundleIdentifier ?? "com.lasuite.app",
@@ -51,10 +59,37 @@ final class ReminderStateStore {
         return value
     }
 
+    var reminderText: String? {
+        defaults.string(forKey: Self.reminderTextKey)
+    }
+
+    var reminderDate: Date? {
+        guard let isoString = defaults.string(forKey: Self.reminderDateKey) else {
+            return nil
+        }
+        return Self.iso8601Formatter.date(from: isoString)
+            ?? ISO8601DateFormatter().date(from: isoString)
+    }
+
     func setReminderOn(_ on: Bool, caller: String = #function) {
         Self.logger.info(
             "[WRITE] caller=\(caller, privacy: .public) suite=\(self.storageSuite, privacy: .public) key=\(Self.reminderKey, privacy: .public) value=\(on) usingAppGroup=\(self.isUsingAppGroup)"
         )
         defaults.set(on, forKey: Self.reminderKey)
+
+        if !on {
+            defaults.removeObject(forKey: Self.reminderTextKey)
+            defaults.removeObject(forKey: Self.reminderDateKey)
+            Self.logger.info("[WRITE] cleared reminder text and date because reminder is OFF")
+        }
+    }
+
+    func setReminder(content: String, date: Date, caller: String = #function) {
+        let isoString = Self.iso8601Formatter.string(from: date)
+        Self.logger.info(
+            "[WRITE] caller=\(caller, privacy: .public) suite=\(self.storageSuite, privacy: .public) text=\(content, privacy: .public) date=\(isoString, privacy: .public)"
+        )
+        defaults.set(content, forKey: Self.reminderTextKey)
+        defaults.set(isoString, forKey: Self.reminderDateKey)
     }
 }

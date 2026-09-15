@@ -1,7 +1,13 @@
 import { registerPlugin } from '@capacitor/core'
 
+export interface ReminderState {
+  on: boolean
+  text?: string
+  date?: string
+}
+
 export interface ReminderBridgePlugin {
-  getReminderState(): Promise<{ on: boolean }>
+  getReminderState(): Promise<ReminderState>
   setReminderState(options: { on: boolean }): Promise<void>
 }
 

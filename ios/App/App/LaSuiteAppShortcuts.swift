@@ -21,5 +21,17 @@ struct LaSuiteAppShortcuts: AppShortcutsProvider {
             shortTitle: "Activate Reminder",
             systemImageName: "bell.fill"
         )
+
+        AppShortcut(
+            intent: CreateReminderIntent(),
+            phrases: [
+                "Create reminder in \(.applicationName)",
+                "Create a reminder in \(.applicationName)",
+                "Créer un rappel dans \(.applicationName)",
+                "Créer un rappel avec \(.applicationName)",
+            ],
+            shortTitle: "Create Reminder",
+            systemImageName: "calendar.badge.plus"
+        )
     }
 }

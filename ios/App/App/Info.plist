@@ -24,6 +24,10 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSRemindersUsageDescription</key>
+	<string>La Suite needs access to Reminders to create reminders from Siri and Shortcuts.</string>
+	<key>NSRemindersFullAccessUsageDescription</key>
+	<string>La Suite needs full access to Reminders to create reminders from Siri and Shortcuts.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
