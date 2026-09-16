@@ -16,22 +16,30 @@ public class ReminderBridgePlugin: CAPPlugin, CAPBridgedPlugin {
     ]
 
     @objc func getReminderState(_ call: CAPPluginCall) {
-        bridgeLogger.info(
-            "getReminderState called. appGroup=\(ReminderStateStore.appGroupID, privacy: .public) usingAppGroup=\(ReminderStateStore.shared.isUsingAppGroup)"
-        )
         let store = ReminderStateStore.shared
         let on = store.isReminderOn
-        var result: [String: Any] = ["on": on]
+        let items = store.reminders
 
-        if let text = store.reminderText {
-            result["text"] = text
+        // Serialize each ReminderItem as a plain [String: String] dictionary
+        // so Capacitor can bridge it to JS without a custom type.
+        let remindersPayload: [[String: String]] = items.map { item in
+            ["id": item.id, "text": item.text, "date": item.date]
         }
 
-        if let date = store.reminderDate {
-            result["date"] = ISO8601DateFormatter().string(from: date)
+        let result: [String: Any] = [
+            "on": on,
+            "reminders": remindersPayload,
+        ]
+
+        // [DEBUG] Log the exact payload going to JS
+        bridgeLogger.info(
+            "[BRIDGE] getReminderState on=\(on) count=\(items.count) usingAppGroup=\(store.isUsingAppGroup) payload=\(String(describing: result), privacy: .public)"
+        )
+        print("[BRIDGE] getReminderState on=\(on) count=\(items.count)")
+        for (i, item) in items.enumerated() {
+            print("[BRIDGE] reminders[\(i)] id=\(item.id) text=\(item.text)")
         }
 
-        bridgeLogger.info("getReminderState returning on=\(on) text=\(store.reminderText ?? "nil") date=\(store.reminderDate?.description ?? "nil")")
         call.resolve(result)
     }
 

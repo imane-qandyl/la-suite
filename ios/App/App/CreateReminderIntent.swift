@@ -53,8 +53,18 @@ struct CreateReminderIntent: AppIntent {
 
         try await ReminderService.shared.createReminder(title: content, dueDate: resolvedDate)
 
-        ReminderStateStore.shared.setReminder(content: content, date: resolvedDate, caller: "CreateReminderIntent.perform")
-        ReminderStateStore.shared.setReminderOn(true, caller: "CreateReminderIntent.perform")
+        // appendReminder sets reminderOn = true internally — no separate setReminderOn call needed.
+        ReminderStateStore.shared.appendReminder(content: content, date: resolvedDate, caller: "CreateReminderIntent.perform")
+
+        // [DEBUG] Read back immediately after write to verify persistence
+        let readBack = ReminderStateStore.shared.reminders
+        print("[DEBUG] reminders after append count=\(readBack.count)")
+        for (i, r) in readBack.enumerated() {
+            print("[DEBUG] reminders[\(i)] id=\(r.id) text=\(r.text) date=\(r.date)")
+        }
+        createReminderLogger.info(
+            "[DEBUG] reminders after append count=\(readBack.count, privacy: .public) isReminderOn=\(ReminderStateStore.shared.isReminderOn)"
+        )
 
         createReminderLogger.info(
             "CreateReminderIntent completed. readBack=\(ReminderStateStore.shared.isReminderOn)"
