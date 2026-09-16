@@ -8,15 +8,14 @@ struct LaSuiteAppShortcuts: AppShortcutsProvider {
         AppShortcut(
             intent: ActivateReminderIntent(),
             phrases: [
-                "Activate reminder in \(.applicationName)",
-                "Activate reminder with \(.applicationName)",
-                "Turn on reminder in \(.applicationName)",
-                "Turn on reminder with \(.applicationName)",
-                "Enable reminder in \(.applicationName)",
-                "Activer le rappel dans \(.applicationName)",
-                "Activer le rappel avec \(.applicationName)",
-                "Active le rappel dans \(.applicationName)",
-                "Active le rappel avec \(.applicationName)",
+                "Activate \(.applicationName)",
+                "Turn on \(.applicationName)",
+                "Enable \(.applicationName)",
+                "Start \(.applicationName)",
+                "Active \(.applicationName)",
+                "Démarre \(.applicationName)",
+                "Lance \(.applicationName)",
+                "Ouvre \(.applicationName)",
             ],
             shortTitle: "Activate Reminder",
             systemImageName: "bell.fill"
