@@ -64,7 +64,12 @@ final class ReminderService {
 
         if #available(iOS 17.0, *) {
             switch status {
-            case .fullAccess, .writeOnly, .authorized:
+            case .fullAccess:
+                return
+            case .writeOnly:
+                // writeOnly is sufficient for creating reminders
+                return
+            case .authorized:
                 return
             case .notDetermined:
                 let granted = try await store.requestFullAccessToReminders()
@@ -78,6 +83,11 @@ final class ReminderService {
         }
 
         switch status {
+        case .fullAccess:
+            return
+        case .writeOnly:
+            // writeOnly is sufficient for creating reminders
+            return
         case .authorized:
             return
         case .notDetermined:

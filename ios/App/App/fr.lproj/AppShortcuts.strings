@@ -1,0 +1,11 @@
+/* CreateReminderIntent phrases - French locale */
+"Rappelle-moi ${timing} avec ${applicationName}" = "Rappelle-moi ${timing} avec ${applicationName}";
+"Rappelle-moi ${timing} dans ${applicationName}" = "Rappelle-moi ${timing} dans ${applicationName}";
+"Prépare un rappel ${timing} dans ${applicationName}" = "Prépare un rappel ${timing} dans ${applicationName}";
+"Prépare un rappel ${timing} avec ${applicationName}" = "Prépare un rappel ${timing} avec ${applicationName}";
+
+/* ActivateReminderIntent phrases - French locale */
+"Active ${applicationName}" = "Active ${applicationName}";
+"Démarre ${applicationName}" = "Démarre ${applicationName}";
+"Lance ${applicationName}" = "Lance ${applicationName}";
+"Ouvre ${applicationName}" = "Ouvre ${applicationName}";

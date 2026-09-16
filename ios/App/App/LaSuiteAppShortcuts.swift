@@ -24,11 +24,11 @@ struct LaSuiteAppShortcuts: AppShortcutsProvider {
         AppShortcut(
             intent: CreateReminderIntent(),
             phrases: [
-                "Create reminder in \(.applicationName)",
-                "Create a reminder in \(.applicationName)",
-                "Créer un rappel dans \(.applicationName)",
-                "Créer un rappel avec \(.applicationName)",
-                "Rappelle-moi quelque chose avec \(.applicationName)",
+                "Rappelle-moi \(\.$timing) avec \(.applicationName)",
+                "Rappelle-moi \(\.$timing) dans \(.applicationName)",
+                "Prépare un rappel \(\.$timing) dans \(.applicationName)",
+                "Prépare un rappel \(\.$timing) avec \(.applicationName)",
+                "Remind me \(\.$timing) with \(.applicationName)",
             ],
             shortTitle: "Create Reminder",
             systemImageName: "calendar.badge.plus"

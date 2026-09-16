@@ -9,43 +9,60 @@ private let createReminderLogger = Logger(
 struct CreateReminderIntent: AppIntent {
     static var title: LocalizedStringResource = "Create Reminder"
     static var description = IntentDescription(
-        "Creates a reminder with text and a scheduled date and time in La Suite and Apple Reminders."
+        "Creates a reminder in La Suite and Apple Reminders."
     )
 
-    static var openAppWhenRun: Bool = false
+    static var openAppWhenRun: Bool = true
     static var isDiscoverable: Bool = true
 
+    // AppEnum — interpolated in the AppShortcut phrase.
+    // Siri resolves this from the spoken phrase (e.g. "demain matin").
+    @Parameter(
+        title: "Timing",
+        description: "When the reminder should alert — for example: demain matin"
+    )
+    var timing: ReminderTiming
+
+    // Free-form String — NOT in the phrase.
+    // Siri collects this via requestValueDialog after phrase match.
     @Parameter(
         title: "Reminder Text",
-        description: "What you want to be reminded about, for example: Consulter le document de Marie",
-        requestValueDialog: IntentDialog("What should I remind you about?")
+        description: "What you want to be reminded about",
+        requestValueDialog: IntentDialog("Que dois-je vous rappeler ?")
     )
     var content: String
 
-    @Parameter(
-        title: "Date and Time",
-        description: "When the reminder should alert, for example: tomorrow at 09:00",
-        requestValueDialog: IntentDialog("When should I remind you?")
-    )
-    var date: Date
-
     static var parameterSummary: some ParameterSummary {
-        Summary("Create reminder \(\.$content) at \(\.$date)")
+        Summary("Rappelle-moi \(\.$timing)") {
+            \.$content
+        }
     }
 
     func perform() async throws -> some IntentResult & ProvidesDialog {
+        print("[INTENT] CreateReminderIntent.perform() START")
         createReminderLogger.info(
-            "Performing CreateReminderIntent. content=\(self.content, privacy: .public) date=\(self.date.formatted(), privacy: .public)"
+            "Performing CreateReminderIntent. timing=\(self.timing.rawValue, privacy: .public) content=\(self.content, privacy: .public)"
         )
 
-        try await ReminderService.shared.createReminder(title: content, dueDate: date)
+        // Convert AppEnum → concrete Date using the local calendar.
+        let resolvedDate = timing.resolvedDate
 
-        ReminderStateStore.shared.setReminder(content: content, date: date, caller: "CreateReminderIntent.perform")
+        createReminderLogger.info(
+            "Resolved date: \(resolvedDate.formatted(), privacy: .public)"
+        )
+
+        try await ReminderService.shared.createReminder(title: content, dueDate: resolvedDate)
+
+        ReminderStateStore.shared.setReminder(content: content, date: resolvedDate, caller: "CreateReminderIntent.perform")
         ReminderStateStore.shared.setReminderOn(true, caller: "CreateReminderIntent.perform")
 
-        createReminderLogger.info("CreateReminderIntent completed. readBack=\(ReminderStateStore.shared.isReminderOn)")
+        createReminderLogger.info(
+            "CreateReminderIntent completed. readBack=\(ReminderStateStore.shared.isReminderOn)"
+        )
 
-        let formattedDate = date.formatted(date: .complete, time: .shortened)
-        return .result(dialog: IntentDialog("Reminder created: \(content) on \(formattedDate)."))
+        let formattedDate = resolvedDate.formatted(
+            Date.FormatStyle().weekday(.wide).month().day().hour().minute()
+        )
+        return .result(dialog: IntentDialog("Rappel créé : \(content) — \(formattedDate)."))
     }
 }
