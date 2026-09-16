@@ -28,6 +28,7 @@ struct LaSuiteAppShortcuts: AppShortcutsProvider {
                 "Create a reminder in \(.applicationName)",
                 "Créer un rappel dans \(.applicationName)",
                 "Créer un rappel avec \(.applicationName)",
+                "Rappelle-moi quelque chose avec \(.applicationName)",
             ],
             shortTitle: "Create Reminder",
             systemImageName: "calendar.badge.plus"
