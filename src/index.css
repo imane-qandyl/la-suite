@@ -1,13 +1,40 @@
+/* ─────────────────────────────────────────
+   La Suite — Design système
+   Palette gouvernementale française
+───────────────────────────────────────── */
 :root {
-  --text: #444;
-  --text-h: #111;
-  --bg: #fff;
-  --border: #ccc;
+  /* Couleurs principales */
+  --navy:        #1a2a5e;   /* bleu marine institutionnel */
+  --navy-light:  #223577;   /* variante hover/focus */
+  --blue-mid:    #3558a0;   /* accent secondaire */
+  --blue-pale:   #e8edf7;   /* surface teintée */
 
-  font-family: system-ui, sans-serif;
-  line-height: 1.5;
-  color: var(--text);
-  background: var(--bg);
+  /* Neutres */
+  --white:       #ffffff;
+  --surface:     #f5f6f9;   /* fond de page */
+  --card:        #ffffff;
+  --border:      #d0d5e3;
+  --border-soft: #e4e7f0;
+
+  /* Texte */
+  --text-primary:   #1a1f3a;
+  --text-secondary: #4a5068;
+  --text-tertiary:  #767d98;
+
+  /* Statuts */
+  --status-on:      #0a7a3e;  /* vert sobre */
+  --status-on-bg:   #e6f4ed;
+  --status-off:     #6b7280;
+  --status-off-bg:  #f3f4f6;
+
+  /* Typographie */
+  font-family: "Marianne", "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--text-primary);
+  background-color: var(--surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
@@ -22,18 +49,6 @@ body {
   min-height: 100vh;
 }
 
-h1,
-h2,
-p {
+h1, h2, h3, p {
   margin: 0;
-}
-
-h1 {
-  font-size: 2rem;
-  color: var(--text-h);
-}
-
-h2 {
-  font-size: 1.25rem;
-  color: var(--text-h);
 }
